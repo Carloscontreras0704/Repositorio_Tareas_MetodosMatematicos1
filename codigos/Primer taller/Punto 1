@@ -1,0 +1,37 @@
+
+#Para empezar, vamos a definir una función la cual va a ser la encargada de verificar que los vectores tengan la misma longitud
+def calcular_centroide(a, b, c):
+    if len(a) != len(b) or len(b) != len(c):
+        raise ValueError("Los vectores deben tener la misma longitud")
+    
+    dimension = len(a)
+
+    # Esta sección de codigo vamos a definir la operacion que vamos a usar para calcular el vector posición del centroide G
+    G = [(a[i] + b[i] + c[i]) / 3 for i in range(dimension)]
+
+    return G
+
+#Estos vectores vacios van a ser usados para almacenar los elementos de los vectores que queremos
+a = []
+b = []
+c = []
+
+# Acá va e codigo para ingresar los elementos de los vectores
+print("Ingrese elementos para el vector a")
+for i in range(3):
+    elemento_a = float(input(f"Ingrese el elemento {i + 1} para a: "))
+    a.append(elemento_a)
+
+print("Ingrese elementos para el vector b")
+for i in range(3):
+    elemento_b = float(input(f"Ingrese el elemento {i + 1} para b: "))
+    b.append(elemento_b)
+
+print("Ingrese elementos para el vector c")
+for i in range(3):
+    elemento_c = float(input(f"Ingrese el elemento {i + 1} para c: "))
+    c.append(elemento_c)
+
+#Acá usaremos la definicion de funcion que ya realizmos en los tres vectores que ingresamos
+centroide = calcular_centroide(a, b, c)
+print("El vector posición del centroide G es:", centroide)
