@@ -1,0 +1,18 @@
+import sympy as sp
+
+# Empezando, vamos a definir las variables simbólicas
+t = sp.symbols('t')
+
+# Ahora se realiza la parametrización de la curva circular de radio uno
+x = sp.cos(t)
+y = sp.sin(t)
+
+# Definir el campo de fuerza F (si observamos, al reemplazar X y Y por sus parametrizaciones, el denominador de la función será 1)
+F = sp.Matrix([-y / (x**2 + y**2), x / (x**2 + y**2)])
+
+# Calcular el trabajo para la curva parametrizada, acá se integrarà de una vez y nos dara el resultado
+W_a = sp.integrate(F.dot([x.diff(t), y.diff(t)]), (t, 0, sp.pi))
+W_b = sp.integrate(F.dot([x.diff(t), y.diff(t)]), (t, 0, -sp.pi))
+
+print("Trabajo desde 0 a π en sentido contrario a las agujas del reloj: {}".format(W_a))
+print("Trabajo desde 0 a -π en sentido de las agujas del reloj: {}".format(W_b))
