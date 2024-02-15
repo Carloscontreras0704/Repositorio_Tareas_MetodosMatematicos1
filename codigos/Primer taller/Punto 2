@@ -1,0 +1,78 @@
+import numpy as np
+
+# Primero nos encargaremos de definir los vectores del ejercicio
+e1 = np.array([1, 0, 0])
+e2 = np.array([0, 1, 0])
+e3 = np.array([0, 0, 1])
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+c = np.array([3, 2, 1])
+d = np.array([6, 5, 4])
+
+# Esta parte es una sencilla ecuacón de sumas y restas de vectores
+result1 = a + b + c + d
+result2 = a + b - c - d
+result3 = a - b + c - d
+result4 = -a + b - c + d
+
+print("Los resultados del punto A son:")
+print("a + b + c + d =", result1)
+print("a + b - c - d =", result2)
+print("a - b + c - d =", result3)
+print("-a + b - c + d =", result4)
+
+# Punto B; Este punto encontraremos el ángulo entre los vectores dados y la base
+angles = [np.arccos(np.dot(a, e1) / (np.linalg.norm(a) * np.linalg.norm(e1))),
+          np.arccos(np.dot(b, e2) / (np.linalg.norm(b) * np.linalg.norm(e2))),
+          np.arccos(np.dot(c, e3) / (np.linalg.norm(c) * np.linalg.norm(e3))),
+          np.arccos(np.dot(d, e1) / (np.linalg.norm(d) * np.linalg.norm(e1)))]
+
+print("El resultado de los ángulos del punto B son:")
+for i in range(3):
+    print(f"Ángulo entre a/b/c/d y e{i + 1}: {np.degrees(angles[i])}°")
+
+# Acá hallaremos la magnitud de los vectores, que es tan simple como sacar su norma
+magnitudes = [np.linalg.norm(a), np.linalg.norm(b), np.linalg.norm(c), np.linalg.norm(d)]
+
+print("Las magnitudes de los vectores del punto c:")
+for i in range(4):
+    print(f"Magnitud de {'abcd'[i]}: {magnitudes[i]}")
+
+# En el punto D hallaremos los ángulos entre los vectores a y b, c y d
+angle_ab = np.arccos(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+angle_cd = np.arccos(np.dot(c, d) / (np.linalg.norm(c) * np.linalg.norm(d)))
+
+print(f"El ángulo entre a y d es: {np.degrees(angle_ab)}°")
+print(f"El ángulo entre c y d es: {np.degrees(angle_cd)}°")
+
+# La proyección de a sobre b del punto E
+projection_ab = np.dot(a, b) / np.linalg.norm(b) * (b / np.linalg.norm(b))
+print("Proyección de a sobre b del punto E:", projection_ab)
+
+# Punto F, ¿Son los vectores coplanares?
+coplanar = np.isclose(np.dot(np.cross(a, b), np.cross(c, d)), 0)
+print("\n(f). ¿Son los vectores a,b,c,d coplanares?:", coplanar)
+
+# Punto G, cual es el producto punto entre (a + b) y (c + d)
+dot_product_g = np.dot(a + b, c + d)
+print("\n(g). (a + b) · (c + d):", dot_product_g)
+
+# Punto h, productos cruz y ángulos entre ellos
+cross_ab = np.cross(a, b)
+cross_bc = np.cross(b, c)
+cross_cd = np.cross(c, d)
+
+angles_cross = [np.arccos(np.dot(cross_ab, cross_bc) / (np.linalg.norm(cross_ab) * np.linalg.norm(cross_bc))),
+                np.arccos(np.dot(cross_bc, cross_cd) / (np.linalg.norm(cross_bc) * np.linalg.norm(cross_cd)))]
+
+print("\n(h). Productos cruz y ángulos:")
+print("a × b:", cross_ab)
+print("b × c:", cross_bc)
+print("c × d:", cross_cd)
+print(f"Ángulo entre a × b y b × c: {np.degrees(angles_cross[0])}°")
+print(f"Ángulo entre b × c y c × d: {np.degrees(angles_cross[1])}°")
+
+# Punto I, c · (a × b) (triple producto mixto)
+dot_product_i = np.dot(c, np.cross(a, b))
+print("(i). c · (a × b):", dot_product_i)
